@@ -89,36 +89,31 @@ Node* no_search_prepend(Node *list, char *str)
 
 Node *delete(Node *head, char *str)
 {
-	Node *p = search(head, str); //search if str is present in the list
-	if(p==NULL)
+	Node *temp = head;
+	if(strcmp(head->name, str)==0)
+	{
+		Node *t = head;
+		head = head->next;
+		free(t);
 		return head;
-
-	if(head == p)
-	{
-		Node *tmp = head->next;
-		free(head);
-		head = tmp;
-	}
-	else
-	{
-		Node *tmp = head;
-		while(tmp->next!=p)
-		{
-			tmp = tmp->next;
-		}
-
-		if(tmp->next->next == NULL)
-		{
-			free(tmp->next);
-			tmp->next = NULL;
-		}
-		else
-		{
-			Node *tmp2 = tmp->next;
-			tmp->next = tmp->next->next;
-			free(tmp2);
-		}
 	}
 
+	while(temp->next->next!=NULL)
+	{
+		if(strcmp(temp->next->name, str)==0)
+		{
+			Node *t = temp->next;
+			temp->next = temp->next->next;
+			free(t);
+			return head;
+		}
+		temp = temp->next;
+	}
+
+	if(strcmp(temp->next->name, str)==0)
+	{
+			free(temp->next);
+			temp->next = NULL;
+	}
 	return head;
 }
