@@ -1,6 +1,6 @@
 ## README
 
-tInstruction:  
+Instruction:  
 chat.rpy, images.rpy and all script files must be in the same directory as of the program files
 
 Compiling :  
